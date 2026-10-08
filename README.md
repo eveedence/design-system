@@ -1,68 +1,26 @@
-# 🎨 Strathon Design System
+# Eveedence Design System
 
-Strathon Design System - UI Components and Tokens
+O kit atual está em [kits/eveedence-v0.2](kits/eveedence-v0.2). Ele contém tokens, componentes React, catálogo e a aplicação no site, com apenas o logotipo atualizado.
 
-## 🎯 Overview
+## Executar o catálogo
 
-The Strathon Design System provides a comprehensive set of design tokens, components, and guidelines for building consistent user interfaces across the Strathon platform.
+```sh
+cd kits/eveedence-v0.2
+pnpm install --frozen-lockfile
+node design-system/generate-tokens.mjs
+pnpm exec tsc --noEmit
+pnpm build
+pnpm start --hostname 127.0.0.1 --port 3107
+```
 
-## 📦 Packages
+Abra `http://127.0.0.1:3107/design-system`.
 
-- @strathon/tokens - Design tokens (colors, typography, spacing)
-- @strathon/components - React components
-- @strathon/icons - Icon library
-- @strathon/themes - Theme configurations
+- [Regras e API](kits/eveedence-v0.2/design-system/README.md)
+- [Revisão de publicação e origem dos ativos](kits/eveedence-v0.2/design-system/PUBLICATION-REVIEW.md)
+- [Site consumidor](https://github.com/eveedence/strathon-site)
 
-## 🛠️ Development
+O kit é uma reconstrução editável das capturas fornecidas, sem garantia de compatibilidade com todos os componentes do artefato anterior. Tema escuro permanece proposta; a home e a ficha usam tema claro. Exemplos são ilustrativos. Não implementa envio de respostas ou verificação de documentos.
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Storybook
+Os pacotes anteriores em `packages/design-system` foram preservados. A adoção do novo kit pelos outros consumidores continua pendente.
 
-### Installation
-
-`ash
-npm install
-`
-
-### Development
-
-`ash
-npm run dev
-`
-
-### Storybook
-
-`ash
-npm run storybook
-`
-
-### Build
-
-`ash
-npm run build
-`
-
-### Testing
-
-`ash
-npm test
-`
-
-## 🚀 Deployment
-
-### Production URLs
-- **GitHub Repository**: https://github.com/strathon/design-system
-
-## 📚 Documentation
-
-- [GitHub Repository](https://github.com/strathon/design-system)
-
-## 🤝 Contributing
-
-Please read our [Contributing Guide](https://github.com/strathon/core-api/blob/main/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Não foi atribuída uma nova licença ao código nem uma autorização de uso da marca. As fontes Geist acompanham a licença OFL no próprio kit; dependências mantêm suas licenças.
