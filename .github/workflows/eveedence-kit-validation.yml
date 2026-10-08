@@ -1,0 +1,26 @@
+name: eveedence-kit-validation
+on:
+  pull_request:
+    paths: ['kits/eveedence-v0.2/**', '.github/workflows/eveedence-kit-validation.yml']
+  push:
+    branches: [main]
+    paths: ['kits/eveedence-v0.2/**', '.github/workflows/eveedence-kit-validation.yml']
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kits/eveedence-v0.2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: node design-system/generate-tokens.mjs
+      - run: git diff --exit-code -- design-system/tokens.css design-system/contrast-report.json
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm build
