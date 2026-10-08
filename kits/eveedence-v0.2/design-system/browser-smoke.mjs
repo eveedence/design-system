@@ -231,7 +231,7 @@ try {
   }
 
   await navigate("/", viewports[1]);
-  const navResult = await evaluate("(() => { const button = document.querySelector('.ev-menu-toggle'); button?.click(); const nav = document.querySelector('#ev-site-nav'); return { open: nav?.classList.contains('is-open') || false, assuranceLink: Boolean(nav?.querySelector('a[href=\"/assurance\"]')), staleLabel: [...(nav?.querySelectorAll('a') || [])].some((a) => a.textContent?.includes('Um caso real')) }; })()");
+  const navResult = await evaluate("(async () => { const button = document.querySelector('.ev-menu-toggle'); button?.click(); await new Promise((resolve) => setTimeout(resolve, 80)); const nav = document.querySelector('#ev-site-nav'); return { open: nav?.classList.contains('is-open') || false, assuranceLink: Boolean(nav?.querySelector('a[href=\"/assurance\"]')), staleLabel: [...(nav?.querySelectorAll('a') || [])].some((a) => a.textContent?.includes('Um caso real')) }; })()");
   report.interactions.push({ name: "mobile navigation", ...navResult });
   if (!navResult.open || !navResult.assuranceLink || navResult.staleLabel) {
     failures.push("Mobile navigation interaction failed or retained stale 'Um caso real' label");
