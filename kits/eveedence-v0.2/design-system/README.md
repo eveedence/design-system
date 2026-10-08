@@ -1,6 +1,6 @@
-# Eveedence Design System v0.2 RC
+# Eveedence Design System v0.2 — frozen
 
-**Status:** release candidate (`0.2.0-rc.1`). Freeze only after CI and browser verification pass on the PR heads.\n\nEsta RC é wordmark-only e alinha o sistema a **Evidence Operations** comercialmente e **Provability Infrastructure** tecnicamente. O freeze do Design System não altera readiness do produto nem gates de publicação do evdnce.\n
+**Status:** `0.2.0` **frozen em 2026-10-08**. O freeze cobre o contrato visual/técnico deste kit; não altera readiness do produto, publicação do site ou gates do `evdnce`.\n\nEsta RC é wordmark-only e alinha o sistema a **Evidence Operations** comercialmente e **Provability Infrastructure** tecnicamente. O freeze do Design System não altera readiness do produto nem gates de publicação do evdnce.\n
 ## Abrir
 
 Na raiz do projeto:
@@ -56,7 +56,7 @@ Os valores em #CE102C dos screenshots históricos não definem a identidade nova
 - O símbolo foi removido do catálogo, componentes e favicon; seu arquivo anterior permanece apenas no backup histórico.
 - O logo não é sinal de integridade, completude ou verificação.
 - Geist Sans permanece; Geist Mono é usada em identificadores, horários, tokens e metadados.
-- Raios candidatos da v0.2: controle 8 px, card 12 px e shell 16 px; pill fica restrito a estados e chips.
+- Raios v0.2: controle 8 px, card 12 px e shell 16 px; pill fica restrito a estados e chips.
 - Fontes reaproveitadas do cache compilado do site: Geist Latin variável e Geist Mono Latin variável. Não há pedido externo de fonte em runtime.
 - A tagline antiga não foi incorporada.
 
@@ -113,3 +113,13 @@ O arquivo index.ts exporta os componentes individualmente e o namespace Eveedenc
 - `/assurance`
 
 `/design-system` permanece catálogo de desenvolvimento e deve ficar `noindex`; não aparece no footer público.
+
+## Evidência do freeze
+
+Antes do freeze, o mesmo RC passou nos dois consumidores:
+
+- `eveedence/design-system` — Actions run `37728778589`: geração de tokens, drift check, TypeScript, build de produção e browser smoke completos; artifact `11529151584`.
+- `eveedence/strathon-site` — Actions run `37728920472`: o mesmo gate completo passou no consumidor real; artifact `11529371023`.
+- Browser smoke: 7 rotas em desktop e mobile, sem overflow horizontal de documento, sem console errors; navegação móvel exercitada; `/design-system` confirmado `noindex,nofollow`; Proof Test submetido e ficha gerada sem score.
+
+O commit de freeze ainda deve reproduzir esses gates. Merge e publicação continuam decisões separadas.
