@@ -1,68 +1,42 @@
-# 🎨 Strathon Design System
+# Eveedence Design System
 
-Strathon Design System - UI Components and Tokens
+> **Referência visual vigente: Eveedence Design System v0.2.0.** O material em `packages/design-system/` é legado e não deve ser usado como referência de marca, tokens ou componentes para trabalhos novos.
 
-## 🎯 Overview
+## Qual versão consultar?
 
-The Strathon Design System provides a comprehensive set of design tokens, components, and guidelines for building consistent user interfaces across the Strathon platform.
+| Fonte | Responsabilidade |
+|---|---|
+| [Kit v0.2.0 — baseline congelada em 08/10/2026](https://github.com/eveedence/design-system/tree/44d50876edcc04e8b532899f8401f05e05336a4b/kits/eveedence-v0.2) | Contrato visual, logotipo, tokens e componentes |
+| [PR #1 — revisão do kit](https://github.com/eveedence/design-system/pull/1) | Acompanhar a revisão e o estado de integração; verificar seu HEAD antes de usar |
+| [Documentação do kit na baseline](https://github.com/eveedence/design-system/blob/44d50876edcc04e8b532899f8401f05e05336a4b/kits/eveedence-v0.2/design-system/README.md) | Regras de marca, arquitetura de tokens e API |
+| `packages/design-system/` | Histórico preservado; não é o design system vigente |
 
-## 📦 Packages
+Em 24/11/2026, o kit encontrava-se na PR #1, ainda não integrada à branch padrão. A presença de material legado na `main` não o torna canônico. Se o diretório do kit não estiver na revisão local, consulte a baseline acima ou a PR para a revisão em andamento.
 
-- @strathon/tokens - Design tokens (colors, typography, spacing)
-- @strathon/components - React components
-- @strathon/icons - Icon library
-- @strathon/themes - Theme configurations
+## Precedência
 
-## 🛠️ Development
+- Identidade e implementação visual: v0.2, wordmark-only, tokens e componentes versionados.
+- Jornadas e telas: pesquisa de UX mantida separadamente; estudos e wireframes não substituem tokens nem o SVG mestre.
+- Posicionamento e limites de produto: decisões de estratégia vigentes; o kit não é autoridade sobre prontidão técnica, adoção de mercado ou condições comerciais.
+- Mudanças de conteúdo não alteram o contrato visual congelado. Alterações de marca, tokens, contratos de componentes ou semântica de estados exigem decisão explícita de versão.
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Storybook
+## Executar o catálogo
 
-### Installation
+Na revisão que contém `kits/eveedence-v0.2/`:
 
-`ash
-npm install
-`
+```sh
+cd kits/eveedence-v0.2
+pnpm install --frozen-lockfile
+node design-system/generate-tokens.mjs
+pnpm exec tsc --noEmit
+pnpm build
+pnpm start --hostname 127.0.0.1 --port 3107
+```
 
-### Development
+Abra `http://127.0.0.1:3107/design-system`. O tema escuro permanece proposta do catálogo. Os exemplos são ilustrativos.
 
-`ash
-npm run dev
-`
+## Limites de uso e publicação
 
-### Storybook
+O repositório é público. Acesso a arquivos, freeze visual, CI verde e merge são fatos distintos de licença de redistribuição, autorização de uso da marca e publicação do site. Não foi atribuída uma nova licença geral ao kit; as fontes Geist incluem sua licença OFL. Consulte a revisão de publicação na versão utilizada. Não se infere licença do kit a partir dos metadados do legado.
 
-`ash
-npm run storybook
-`
-
-### Build
-
-`ash
-npm run build
-`
-
-### Testing
-
-`ash
-npm test
-`
-
-## 🚀 Deployment
-
-### Production URLs
-- **GitHub Repository**: https://github.com/strathon/design-system
-
-## 📚 Documentation
-
-- [GitHub Repository](https://github.com/strathon/design-system)
-
-## 🤝 Contributing
-
-Please read our [Contributing Guide](https://github.com/strathon/core-api/blob/main/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+O kit não comprova prontidão de produto, operação de conectores, certificação ou suficiência de evidências. A adoção pelos consumidores e a publicação do site são decisões separadas.
