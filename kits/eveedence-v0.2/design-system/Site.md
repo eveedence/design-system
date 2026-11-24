@@ -14,7 +14,7 @@ Recursos ▾
    Evidence Jobs · Pesquisa · Guias · Casos
 Abordagem técnica
 Empresa
-[Reconstrua um caso]
+[Teste seu Custo da Prova]
 ```
 
 Começar pequeno: o objetivo é o visitante entender a tese, não ter 40 páginas. Regulador **nunca** é item de menu. Dentro de uma solução, o regulador vira “Contexto aplicável” (ANPD, BCB, Anatel, ECA Digital) e o Evidence Job continua sendo a unidade de investigação. Páginas de solução reutilizam `Hero`, `CaseThread`, `QATable`, `SolutionCard` e `ProofTeaser`; só o caso de exemplo muda.
