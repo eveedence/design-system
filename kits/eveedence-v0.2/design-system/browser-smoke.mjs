@@ -1,12 +1,15 @@
 "use strict";
 
 import { spawn } from "node:child_process";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:3107";
 const CHROME_BIN = process.env.CHROME_BIN || "google-chrome";
 const CDP_PORT = Number(process.env.CDP_PORT || 9222);
 const ARTIFACT_DIR = process.env.BROWSER_ARTIFACTS || "design-system/browser-artifacts";
+const tokens = JSON.parse(await readFile(new URL("./tokens.json", import.meta.url), "utf8"));
+const semanticKeys = ["surface-app", "surface-card", "surface-sunken", "text-primary", "text-secondary", "text-muted", "border-control", "action-brand"];
+const toRgb = hex => `rgb(${[1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16)).join(", ")})`;
 
 const routes = [
   "/",
@@ -214,6 +217,35 @@ try {
     };
     report.routes.push(entry);
 
+    // Check the computed layout, not just page-level horizontal overflow.
+    const gridColumns = async selector => evaluate(`(() => { const node = document.querySelector(${JSON.stringify(selector)}); if (!node) return null; const style = getComputedStyle(node); return style.display === "grid" ? style.gridTemplateColumns.trim().split(/\\s+/).length : null; })()`);
+    if (pathname === "/assurance") {
+      const columns = await gridColumns(".ev-assurance-model");
+      const expected = viewport.mobile ? 1 : 5;
+      entry.assuranceColumns = columns;
+      if (columns !== expected) failures.push(`Assurance model (${viewport.name}): expected ${expected} columns, got ${columns}`);
+    }
+    if (pathname === "/design-system") {
+      const columns = await gridColumns(".ev-evidence-row");
+      const expected = viewport.mobile ? 1 : 2;
+      entry.evidenceRowColumns = columns;
+      if (columns !== expected) failures.push(`Evidence row (${viewport.name}): expected ${expected} columns, got ${columns}`);
+      if (viewport.mobile) {
+        const direction = await evaluate("(() => { const node = document.querySelector('.ev-evidence-row__status'); return node ? getComputedStyle(node).flexDirection : null; })()");
+        entry.evidenceStatusDirection = direction;
+        if (direction !== "column") failures.push("Mobile evidence status must stack vertically");
+      }
+    }
+    if (viewport.mobile && (pathname === "/" || pathname === "/assurance" || pathname.startsWith("/solucoes/"))) {
+      for (const selector of [".ev-how", ".ev-not-grid"]) {
+        const exists = await evaluate(`Boolean(document.querySelector(${JSON.stringify(selector)}))`);
+        if (!exists) continue;
+        const columns = await gridColumns(selector);
+        (entry.mobileGrids ??= {})[selector] = columns;
+        if (columns !== 1) failures.push(`${pathname} mobile ${selector}: expected 1 column, got ${columns}`);
+      }
+    }
+
     if (state.path !== pathname) failures.push(pathname + " (" + viewport.name + ") navigated to " + state.path);
     if (!state.h1) failures.push(pathname + " (" + viewport.name + ") has no H1");
     if (state.horizontalOverflow) failures.push(pathname + " (" + viewport.name + ") causes document-level horizontal overflow");
@@ -229,6 +261,33 @@ try {
       await navigate(pathname, viewport);
     }
   }
+
+
+  // Compare both themes against the primitive values in tokens.json, independently
+  // of the CSS custom properties that the catalog itself consumes.
+  await navigate("/design-system", viewports[0]);
+  for (const theme of ["light", "dark"]) {
+    const state = await evaluate(`(async () => {
+      const theme = ${JSON.stringify(theme)};
+      const root = document.querySelector(".ds-root");
+      const button = [...document.querySelectorAll(".ds-theme button")].find(node => node.textContent.trim() === (theme === "light" ? "Claro" : "Escuro"));
+      if (!root || !button) return { theme: null, swatches: [] };
+      const deadline = Date.now() + 3000;
+      while (root.dataset.evTheme !== theme && Date.now() < deadline) {
+        button.click();
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      return { theme: root.dataset.evTheme, swatches: [...root.querySelectorAll(".ds-token-color[data-semantic-token]")].map(node => ({ key: node.dataset.semanticToken, color: getComputedStyle(node).backgroundColor })) };
+    })()`);
+    const expected = Object.fromEntries(semanticKeys.map(key => [key, toRgb(tokens.primitives[tokens[theme][key].slice(1, -1)])]));
+    const actual = Object.fromEntries(state.swatches.map(swatch => [swatch.key, swatch.color]));
+    const pass = state.theme === theme && state.swatches.length === semanticKeys.length && semanticKeys.every(key => actual[key] === expected[key]);
+    report.interactions.push({ name: "semantic swatches", theme, renderedTheme: state.theme, expected, actual, pass });
+    if (!pass) failures.push("Semantic swatches do not match tokens.json in " + theme + " theme");
+    const shot = await cdp.call("Page.captureScreenshot", { format: "png", captureBeyondViewport: true, fromSurface: true }, sessionId);
+    await writeFile(ARTIFACT_DIR + "/design-system-swatches-" + theme + ".png", Buffer.from(shot.data, "base64"));
+  }
+  if (pageErrors.length) failures.push("Theme switching emitted browser errors: " + pageErrors.join(" | "));
 
   await navigate("/", viewports[1]);
   const navResult = await evaluate("(async () => { const button = document.querySelector('.ev-menu-toggle'); button?.click(); await new Promise((resolve) => setTimeout(resolve, 80)); const nav = document.querySelector('#ev-site-nav'); return { open: nav?.classList.contains('is-open') || false, assuranceLink: Boolean(nav?.querySelector('a[href=\"/assurance\"]')), staleLabel: [...(nav?.querySelectorAll('a') || [])].some((a) => a.textContent?.includes('Um caso real')) }; })()");
