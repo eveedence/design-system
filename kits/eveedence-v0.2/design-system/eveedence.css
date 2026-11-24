@@ -10,7 +10,7 @@
 .ev-root button,.ds-root button,.ev-root input,.ds-root input,.ev-root select{font:inherit}
 .ev-root button,.ds-root button{cursor:pointer}
 .ev-root :focus-visible,.ds-root :focus-visible{outline:2px solid var(--ev-focus);outline-offset:4px}
-.ev-root button:disabled{cursor:not-allowed;opacity:.5}
+.ev-root button:disabled,.ds-root button:disabled{cursor:not-allowed;opacity:.5}
 .ev-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .ev-skip{position:fixed;z-index:100;top:8px;left:8px;transform:translateY(-160%);background:var(--ev-action-primary);color:var(--ev-action-on-primary)!important;padding:12px 18px;border-radius:var(--ev-radius-control)}
 .ev-skip:focus{transform:none}

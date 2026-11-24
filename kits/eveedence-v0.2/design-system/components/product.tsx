@@ -3,16 +3,17 @@
 import { ArrowRight, Download } from "lucide-react";
 import { Button, EvidenceStateBadge, MetadataList, SearchField, Tag, type EvidenceDimension, type EvidenceState } from "./base";
 
-export function EvidenceRow({ id, type, title, source, capturedAt, dimension, state, stateLabel, href = "#" }: {
+export function EvidenceRow({ id, type, title, source, capturedAt, dimension, state, stateLabel, href }: {
   id: string; type: string; title: string; source: string; capturedAt: string;
   dimension: EvidenceDimension; state: EvidenceState; stateLabel: string; href?: string;
 }) {
+  const destination = href?.trim();
   return <article className="ev-evidence-row">
     <div className="ev-evidence-row__main">
       <div className="ev-evidence-row__title"><Tag>{type}</Tag><strong>{title}</strong></div>
       <MetadataList items={[{ label: "ID", value: id, mono: true }, { label: "Origem", value: source }, { label: "Capturado", value: capturedAt, mono: true }]} />
     </div>
-    <div className="ev-evidence-row__status"><EvidenceStateBadge dimension={dimension} state={state} label={stateLabel} /><a className="ev-row-action" href={href}>Abrir <ArrowRight size={14} aria-hidden="true" /></a></div>
+    <div className="ev-evidence-row__status"><EvidenceStateBadge dimension={dimension} state={state} label={stateLabel} />{destination && destination !== "#" ? <a className="ev-row-action" href={destination}>Abrir <ArrowRight size={14} aria-hidden="true" /></a> : null}</div>
   </article>;
 }
 
@@ -31,7 +32,7 @@ export function ComponentExamples() {
     <div className="ev-example"><p className="ev-eyebrow">Estados · dimensão explícita</p><div className="ev-demo-row"><EvidenceStateBadge dimension="integrity" state="verified" label="Verificada" /><EvidenceStateBadge dimension="attestation" state="unverified" label="Ainda não avaliada" /><EvidenceStateBadge dimension="assurance" state="insufficient" label="Informação insuficiente" /><EvidenceStateBadge dimension="capture" state="integrity" label="Problema detectado" /></div><p className="ev-caption">Integridade, attestation, assurance e captura não formam um único semáforo. Cada badge declara a dimensão avaliada.</p></div>
     <div className="ev-example"><SearchField /></div>
     <div className="ev-example"><p className="ev-eyebrow">Metadata primitives</p><MetadataList items={[{ label: "Evidence ID", value: "evd_8f3e2a7b", mono: true }, { label: "Capturado", value: "14 fev 2026 · 09:12 UTC", mono: true }, { label: "Origem", value: "Monitoramento" }]} /></div>
-    <div className="ev-example"><p className="ev-eyebrow">EvidenceRow</p><EvidenceRow id="evd_8f3e2a7b" type="observation" title="Alerta de acesso anômalo" source="Monitoramento" capturedAt="14 fev 2026 · 09:12 UTC" dimension="integrity" state="verified" stateLabel="Verificada" href="#componentes" /></div>
+    <div className="ev-example"><p className="ev-eyebrow">EvidenceRow · destino ilustrativo</p><EvidenceRow id="evd_8f3e2a7b" type="observation" title="Alerta de acesso anômalo" source="Monitoramento" capturedAt="14 fev 2026 · 09:12 UTC" dimension="integrity" state="verified" stateLabel="Verificada" href="#evidence-row-example-details" /><p id="evidence-row-example-details" className="ev-caption" tabIndex={-1}>Detalhes do exemplo: alerta de monitoramento fictício, sem artefato real associado.</p><p className="ev-eyebrow">EvidenceRow · sem destino</p><EvidenceRow id="evd_demo_02" type="observation" title="Registro ilustrativo sem destino" source="Monitoramento" capturedAt="14 fev 2026 · 09:13 UTC" dimension="integrity" state="unverified" stateLabel="Ainda não avaliada" /></div>
     <div className="ev-example"><p className="ev-eyebrow">SidebarNav</p><div className="ev-sidebar-preview"><SidebarNav items={sidebarItems} /></div></div>
     <div className="ev-example ev-demo-row"><Tag>decision</Tag><Tag>observation</Tag><Tag>Controle</Tag><Tag>Exemplo ilustrativo</Tag></div>
   </>;

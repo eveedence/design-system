@@ -289,6 +289,30 @@ try {
   }
   if (pageErrors.length) failures.push("Theme switching emitted browser errors: " + pageErrors.join(" | "));
 
+  // Exercise actual catalog examples, including the optional destination.
+  const controls = await evaluate(`(() => {
+    const root = document.querySelector(".ds-root");
+    const buttons = [...(root?.querySelectorAll("button.ev-button") || [])];
+    const disabled = buttons.find(button => button.disabled);
+    const rows = [...(root?.querySelectorAll(".ev-evidence-row") || [])];
+    const links = rows.map(row => row.querySelector(".ev-row-action"));
+    return {
+      buttonCount: buttons.length,
+      defaultButtons: buttons.every(button => button.getAttribute("type") === "button"),
+      disabled: Boolean(disabled),
+      disabledOpacity: disabled ? getComputedStyle(disabled).opacity : null,
+      disabledCursor: disabled ? getComputedStyle(disabled).cursor : null,
+      rowCount: rows.length,
+      linkCount: links.filter(Boolean).length,
+      validTarget: Boolean(links[0]?.hash && links[0].hash !== "#" && document.getElementById(links[0].hash.slice(1))),
+      noDestinationAction: Boolean(links[1]),
+    };
+  })()`);
+  report.interactions.push({ name: "catalog controls and evidence destinations", ...controls });
+  if (!controls.buttonCount || !controls.defaultButtons || !controls.disabled || controls.disabledOpacity !== "0.5" || controls.disabledCursor !== "not-allowed" || controls.rowCount !== 2 || controls.linkCount !== 1 || !controls.validTarget || controls.noDestinationAction) {
+    failures.push("Catalog controls or optional evidence destination failed");
+  }
+
   await navigate("/", viewports[1]);
   const navResult = await evaluate("(async () => { const button = document.querySelector('.ev-menu-toggle'); button?.click(); await new Promise((resolve) => setTimeout(resolve, 80)); const nav = document.querySelector('#ev-site-nav'); return { open: nav?.classList.contains('is-open') || false, assuranceLink: Boolean(nav?.querySelector('a[href=\"/assurance\"]')), staleLabel: [...(nav?.querySelectorAll('a') || [])].some((a) => a.textContent?.includes('Um caso real')) }; })()");
   report.interactions.push({ name: "mobile navigation", ...navResult });
@@ -297,6 +321,26 @@ try {
   }
 
   await navigate("/custo-da-prova", viewports[1]);
+  const skipReady = await evaluate(`(() => {
+    const skip = document.querySelector("a.ev-skip");
+    if (!skip || !skip.hash || !document.getElementById(skip.hash.slice(1))) return false;
+    skip.focus();
+    return document.activeElement === skip;
+  })()`);
+  if (skipReady) {
+    await cdp.call("Input.dispatchKeyEvent", { type: "keyDown", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13 }, sessionId);
+    await cdp.call("Input.dispatchKeyEvent", { type: "keyUp", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13 }, sessionId);
+    await delay(100);
+  }
+  const proofControls = await evaluate(`(() => ({
+    skipTargetFocused: document.activeElement?.id === "conteudo" && location.hash === "#conteudo",
+    explicitSubmit: document.querySelector(".ev-proof-form button")?.getAttribute("type") === "submit",
+    clipboardNotice: [...document.querySelectorAll(".ev-test .ev-caption")].some(node => node.textContent.includes("área de transferência") && node.textContent.includes("Copiar ficha") && node.textContent.includes("poderá permanecer")),
+  }))()`);
+  report.interactions.push({ name: "proof keyboard and privacy notice", skipReady, ...proofControls });
+  if (!skipReady || !proofControls.skipTargetFocused || !proofControls.explicitSubmit || !proofControls.clipboardNotice) {
+    failures.push("Proof Test skip link, explicit submit or clipboard notice failed");
+  }
   const proofResult = await evaluate("(async () => { const setValue = (element, value) => { const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), 'value'); descriptor.set.call(element, value); element.dispatchEvent(new Event(element.tagName === 'SELECT' ? 'change' : 'input', { bubbles: true })); }; const inputs = [...document.querySelectorAll('.ev-proof-form input')]; const selects = [...document.querySelectorAll('.ev-proof-form select')]; ['3','5','1','8'].forEach((value, index) => setValue(inputs[index], value)); ['partial','no','help'].forEach((value, index) => setValue(selects[index], value)); await new Promise((resolve) => setTimeout(resolve, 30)); document.querySelector('.ev-proof-form')?.requestSubmit(); await new Promise((resolve) => setTimeout(resolve, 150)); const sheet = document.querySelector('.ev-sheet'); const text = sheet?.innerText || ''; return { visible: Boolean(sheet), text, hasNoScoreLanguage: text.includes('não uma pontuação'), hasGapSection: text.includes('O que ainda precisa ser investigado') }; })()");
   report.interactions.push({
     name: "Proof Test submission",
@@ -309,6 +353,21 @@ try {
   if (!proofResult.visible || !proofResult.hasNoScoreLanguage || !proofResult.hasGapSection) {
     failures.push("Proof Test did not produce the expected reconstruction sheet");
   }
+
+  // Stub only the OS clipboard boundary; test that the explicit UI action invokes it.
+  const clipboard = await evaluate(`(async () => {
+    const writes = [];
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async text => { writes.push(text); } } });
+    const button = document.querySelector(".ev-sheet button");
+    const type = button?.getAttribute("type");
+    const initial = writes.length;
+    button?.click();
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return { type, initial, writes: writes.length, hasSheet: Boolean(writes[0]?.includes("Pessoas necessárias: 3") && writes[0]?.includes("Lacunas:")), feedback: button?.textContent.includes("Ficha copiada") || false };
+  })()`);
+  report.interactions.push({ name: "explicit clipboard copy (stubbed OS boundary)", ...clipboard });
+  if (clipboard.type !== "button" || clipboard.initial !== 0 || clipboard.writes !== 1 || !clipboard.hasSheet || !clipboard.feedback) failures.push("Explicit clipboard copy failed");
+  if (pageErrors.length) failures.push("Proof Test emitted browser errors: " + pageErrors.join(" | "));
 
   off();
   await cdp.call("Target.closeTarget", { targetId: target.targetId });

@@ -1,8 +1,8 @@
 # Site
 
-Arquitetura e blueprint das páginas. Os previews de página (`PageHomeTop`, `PageHomeBottom`, `PageProofTest`) usam exatamente estes componentes e o texto de `Eveedence.copy`: o texto mora num lugar só.
+Arquitetura e blueprint das páginas. A implementação usa `SiteHome`, `SolutionDetail` e `AssuranceFirmsPage` em `components/site.tsx`, e `ProofTest` em `components/proof-test.tsx`. `copy.ts` reúne mensagem principal, CTA e aviso de privacidade; `components/site-content.ts` reúne conteúdo estruturado dos exemplos e soluções; a copy específica das seções e da ficha também mora nos respectivos componentes. `guide.tsx` apresenta o catálogo e incorpora a home real. `components.tsx` é um re-export de compatibilidade.
 
-## Mapa
+## Mapa conceitual (não equivale às rotas implementadas)
 
 ```text
 Home
@@ -17,7 +17,7 @@ Empresa
 [Teste seu Custo da Prova]
 ```
 
-Começar pequeno: o objetivo é o visitante entender a tese, não ter 40 páginas. Regulador **nunca** é item de menu. Dentro de uma solução, o regulador vira “Contexto aplicável” (ANPD, BCB, Anatel, ECA Digital) e o Evidence Job continua sendo a unidade de investigação. Páginas de solução reutilizam `Hero`, `CaseThread`, `QATable`, `SolutionCard` e `ProofTeaser`; só o caso de exemplo muda.
+Começar pequeno: o objetivo é o visitante entender a tese, não ter 40 páginas. Regulador **nunca** é item de menu. Dentro de uma solução, o regulador vira “Contexto aplicável” (ANPD, BCB, Anatel, ECA Digital) e o Evidence Job continua sendo a unidade de investigação. As páginas de solução usam `SolutionDetail`, `PageHero` e componentes compartilhados; a home utiliza `Hero` e `CaseThread`. As rotas efetivas estão listadas no README do kit.
 
 ## Home: ordem das seções
 
@@ -42,7 +42,7 @@ O CTA conduz à ficha exploratória, sem prometer uma demo operacional ou diagn�
 
 - O resultado é uma **ficha**, não uma nota: sistemas envolvidos, pessoas necessárias, proveniência desconhecida, version binding (completo, parcial, ausente), tempo estimado, repetível por terceiro. “Insumos de reconstrução” = pessoas + sistemas, e o rodapé da ficha diz isso. Sem pontuação, sem faixa, sem “risco alto”.
 - Lacunas aparecem como lista do que a equipe teria de resolver à mão (`ev-sheet__open`), nunca como veredito.
-- Hoje o componente **não envia nada**: as respostas ficam no navegador e o texto da página diz isso. Se um dia a ficha for enviada ou salva, a frase “Suas respostas ficam neste navegador” sai ou muda **no mesmo commit**.
+- Hoje o componente **não envia nem armazena as respostas pelo site**: elas ficam no estado da página. A ação explícita Copiar ficha grava uma cópia na área de transferência do dispositivo, que pode permanecer após recarregar. Se o comportamento mudar, atualizar o aviso de privacidade em `copy.ts` **no mesmo commit**.
 - Fecha com uma ficha local. Não implica disponibilidade de um serviço contratado.
 
 ## Regras de página

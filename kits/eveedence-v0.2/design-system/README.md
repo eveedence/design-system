@@ -17,7 +17,7 @@ pnpm start --hostname 127.0.0.1 --port 3107
 
 - `/design-system`: catálogo, marca, tokens, temas, tipografia, espaçamento e componentes.
 - `/`: aplicação da marca na home.
-- `/custo-da-prova`: ficha interativa, sem score e sem transmissão ou armazenamento de respostas.
+- `/custo-da-prova`: ficha interativa, sem score, sem transmissão ou armazenamento de respostas pelo site. Copiar ficha grava uma cópia na área de transferência do dispositivo.
 - `/design-system.html`: encaminha o endereço legado para o catálogo novo.
 
 ## Fontes de verdade
@@ -56,7 +56,7 @@ Os valores em #CE102C dos screenshots históricos não definem a identidade nova
 - Não recompor o wordmark, não alterar seus cortes, proporção ou cor.
 - Respiro proposto: ao menos ¼ da altura do ativo em cada lado.
 - O mesmo logotipo vermelho aparece em claro e escuro. Não foi criada uma versão branca recolorida.
-- O símbolo foi removido do catálogo, componentes e favicon; seu arquivo anterior permanece apenas no backup histórico.
+- O símbolo foi removido do catálogo, componentes e favicon. O material histórico permanece no histórico do projeto; este kit não distribui um backup local.
 - O logo não é sinal de integridade, completude ou verificação.
 - Geist Sans permanece; Geist Mono é usada em identificadores, horários, tokens e metadados.
 - Raios v0.2: controle 8 px, card 12 px e shell 16 px; pill fica restrito a estados e chips.
@@ -65,7 +65,7 @@ Os valores em #CE102C dos screenshots históricos não definem a identidade nova
 
 ## Arquitetura de tokens
 
-Contrato da RC: `primitives → semantics → components`. Valores literais existem apenas em primitives; semantics apontam para primitives; componentes consomem apenas CSS variables semânticas. O gerador falha se encontrar hex hardcoded em `eveedence.css`.
+Contrato da RC: `primitives → semantics → components`. Valores literais existem apenas em primitives; semantics apontam para primitives; componentes usam CSS variables semânticas para cores funcionais; acentos decorativos de identidade usam `brand-signature`, e o catálogo pode mostrar primitivas diretamente. O gerador falha se encontrar hex hardcoded em `eveedence.css`.
 
 ## Cor e acessibilidade
 
@@ -90,22 +90,22 @@ Contrato da RC: `primitives → semantics → components`. Valores literais exis
 - Nomes de ferramentas comerciais foram substituídos por classes de fonte.
 - Elementos localizados representam presença; o caso declara integridade e suficiência não avaliadas.
 - A ficha usa as respostas informadas. Pessoas + sistemas é contagem de insumos, não score.
-- Mudar uma resposta invalida a ficha anterior. Recarregar elimina as respostas.
-- Copiar a ficha é uma ação explícita do usuário.
+- Mudar uma resposta invalida a ficha anterior. Recarregar elimina as respostas mantidas no estado da página.
+- Copiar a ficha é uma ação explícita do usuário que grava uma cópia na área de transferência do dispositivo; essa cópia pode permanecer após recarregar.
 - Não há endpoint de envio, lead capture, preços, diagnósticos vendidos ou verificação documental implementados.
 - Este trabalho não altera gates do produto, licença de evdnce nem estado de publicação.
 
 ## Preservação e integração
 
-Os arquivos anteriores de home, layout e guia foram preservados em `../.backup/brand-refresh-2026-10-08/` como texto. O pacote legado em `evdnce/packages/design-system/canonical` e os trabalhos locais existentes naquele repositório não foram alterados. A adoção no dashboard e em outros consumidores é uma migração posterior.
+O kit não contém um diretório de backup local. Consulte as revisões anteriores no histórico Git para comparação. A adoção no dashboard e em outros consumidores é uma migração posterior.
 
 ## Validação
 
 - TypeScript verificado separadamente com `tsc --noEmit`.
 - Build Next.js de produção executado.
-- Contraste de 52 pares de tokens checado, 0 falhas.
+- Contraste dos pares declarados verificado pelo gerador; consulte o `contrast-report.json` da revisão correspondente.
 - Chromium: home desktop/mobile, navegação móvel, temas do catálogo e ficha interativa.
-- Relatório de navegador e screenshots acompanham o pacote.
+- Relatório de navegador e screenshots são gerados em `design-system/browser-artifacts/` e publicados como artefatos do workflow `eveedence-kit-validation` na revisão correspondente; não acompanham o kit versionado.
 - Não equivale a auditoria completa de acessibilidade nem a aprovação das propostas de marca.
 
 ## API React

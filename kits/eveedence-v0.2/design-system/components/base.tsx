@@ -24,8 +24,8 @@ export function Brand() {
   return <img className="ev-logo" src="/brand/eveedence-logotipo.svg" alt="Eveedence" width={607} height={91} />;
 }
 
-export function Button({ variant = "primary", children, className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "brand" | "ghost"; children: ReactNode }) {
-  return <button className={"ev-button ev-button--" + variant + " " + className} {...props}>{children}</button>;
+export function Button({ variant = "primary", children, className = "", type = "button", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "brand" | "ghost"; children: ReactNode }) {
+  return <button type={type} className={"ev-button ev-button--" + variant + " " + className} {...props}>{children}</button>;
 }
 
 export function StateBadge({ state, children, subtle = false }: { state: EvidenceState; children?: ReactNode; subtle?: boolean }) {

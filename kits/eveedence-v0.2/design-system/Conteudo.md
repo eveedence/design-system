@@ -20,7 +20,7 @@ Cadência: três a quatro posts excelentes por semana, vídeo de 60 a 120 s uma 
 
 ## Regras visuais
 
-- Todo post com visual usa **a linguagem do `CaseThread` ou do `QATable`**: mono para identificadores e horário, Geist Sans para a pergunta, uma lacuna explícita, etiqueta `Exemplo ilustrativo`. Fundo `surface-app` ou `surface-inverse`; vermelho só no traço de abertura.
+- Todo post com visual usa **a linguagem do `CaseThread` ou do `QATable`**: mono para identificadores e horário, Geist Sans para a pergunta, uma lacuna explícita. Use a etiqueta `Exemplo ilustrativo` apenas para exemplos hipotéticos ou fictícios; dados observados e autorizados são identificados como dados de campo. Fundo `surface-app` ou `surface-inverse`; vermelho só no traço de abertura.
 - Sem estatística inventada. Quando houver dado de campo, a unidade e o tamanho da amostra aparecem na mesma tela.
 - Sem logos de cliente, sem nomes de ferramentas reais em exemplos.
 - Vídeo: uma pessoa, uma tela, um diagrama, 90 segundos. Desenhar e explicar; não parecer campanha.
