@@ -16,3 +16,7 @@ Scope: the frozen wordmark-only site/product UI kit on this branch.
 Any post-freeze change to tokens, component contracts, state semantics or brand rules requires an explicit version decision. Content and page instances may evolve within the frozen contract.
 
 This review does not reclassify legacy internal design-system code or change the source-of-truth disclosure matrix.
+
+## Editorial revision — 2026-11-24
+
+Positioning and copy changes remain within the frozen visual contract. They do not grant a new code license, brand-use permission, publication approval, or product capability. The public repository and open PR must not be treated as confidential. The historical freeze evidence above applies to its original revisions; re-run validation against the current review head before merge or deployment. The site consumer is not updated by this revision.

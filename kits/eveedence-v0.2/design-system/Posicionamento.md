@@ -1,89 +1,44 @@
 # Posicionamento
 
-A tese para site e conteúdo dos próximos 60 a 90 dias: **vender o problema “Custo da Prova”, não a plataforma.** O produto ainda está amadurecendo; é a janela para descobrir quais Evidence Jobs se repetem, quais cargos sentem a dor e quais têm orçamento. A comunicação é também a máquina de discovery.
+**Revisão editorial: 2026-11-24.** Orienta a copy do kit; não modifica o contrato visual v0.2.0 congelado em 08/10/2026. Não autoriza publicação nem decide prontidão, ICP, preço ou modelo de negócio.
 
-## Duas camadas
+## Categoria e promessa
 
-| Camada | Nome | Papel |
-|---|---|---|
-| Comercial | **Evidence Operations** | Compreensível, não nos prende a compliance, descreve o trabalho que automatizamos. |
-| Técnica | **Provability Infrastructure** | Explica por que somos diferentes e onde o `evdnce` entra. Não vai na home. |
+| Dimensão | Definição |
+|---|---|
+| Território | Provabilidade (Provability) |
+| Categoria institucional | Governança e Asseguração de IA (AI Governance & Assurance) |
+| Promessa | Governança de IA que você consegue provar. |
+| Descrição funcional | Plataforma de governança e asseguração para processos que usam IA |
+| Operações de evidências | Função de organizar, contextualizar e preparar evidências; não uma nova categoria |
+| Especificação e verificação | Camada técnica distinta da implementação comercial, destinada à verificação independente; não apresentada como padrão público congelado |
 
-**Frase de posicionamento:** a Eveedence é a plataforma de Evidence Operations para organizações que precisam provar decisões, incidentes e controles.
+A promessa é uma direção de produto, não uma afirmação de que o runtime, os conectores ou a asseguração independente estejam disponíveis em produção. A Eveedence não é um gateway de enforcement: não intercepta, bloqueia ou altera o processo observado. Evidência verificável não é garantia da correção de uma decisão. O revisor responsável mantém a conclusão de asseguração; a plataforma não é auditor independente.
 
-**A frase que importa mais:** quando alguém pergunta “prove o que aconteceu e por que vocês decidiram isso”, a Eveedence ajuda a resposta a não começar numa caça a logs, documentos e pessoas.
+## Custo da Prova
 
-**Em uma frase:** a Eveedence conecta as evidências espalhadas pelos seus sistemas e organiza o que aconteceu, por que aconteceu e o que sustenta aquela conclusão.
+Quanto trabalho existe entre uma solicitação real de evidências e uma resposta que possa ser avaliada? O Teste do Custo da Prova é uma ficha local exploratória, sem score, envio, persistência ou verificação documental. Custos, recorrência e orçamento são perguntas de discovery, não resultados demonstrados.
 
-**Em 30 segundos:** empresas executam decisões e controles em dezenas de sistemas. O problema aparece meses depois, quando um auditor, regulador, cliente ou jurídico pede para provar o que aconteceu, e a equipe reconstrói tudo à mão. A Eveedence transforma essas informações dispersas num caso verificável: mostra os fatos, a regra usada, as evidências disponíveis e também o que está faltando.
+## Públicos a investigar
 
-Nada disso menciona hash, assinatura, standard, blockchain, JSON, governança de IA, LGPD ou SUSEP. Isso vem depois que a pessoa disser “é exatamente isso que acontece aqui”.
+| Perspectiva | Problema a investigar |
+|---|---|
+| Operador | Produzir, organizar e entregar evidências de decisões, controles, supervisão humana, ações e resultados |
+| Revisor ou firma de asseguração | Examinar, reconciliar e avaliar evidências recebidas sem perder a independência da conclusão |
 
-## Custo da Prova (Cost of Proof)
+Brasil é a prioridade de discovery. Selecionar casos por pedidos observados, não por setor presumido ou obrigação abstrata. Os dois públicos são mercados candidatos: não há ICP comercial, oferta, preço, unidade de cobrança ou modelo de negócio validado por este kit. Dossiês e relatórios são possíveis entregáveis, não necessariamente o produto comprado.
 
-A expressão que queremos possuir. As empresas medem custo de compliance, de incidente, de auditoria, de fraude, de segurança. Quase ninguém pergunta: **quanto custa provar, depois, que fizemos a coisa certa?** A pergunta transforma um problema abstrato em dinheiro e cria nossa própria categoria mental. Em inglês: *Cost of Proof*. O Teste do Custo da Prova (`ProofTest`) é a forma dela no site.
+## Mensagem e aplicação
 
-## Ordem de educação
+> **Governança de IA que você consegue provar.**
+> O que aconteceu, a regra que valia, a evidência disponível e o que ainda falta.
 
-Começar pelo 1, nunca pelo 9.
+O CTA conduz ao exercício local de Custo da Prova, sem prometer demonstração operacional ou serviço contratado. As páginas Incident Evidence, Decision Evidence e Assurance Evidence ilustram contextos de uso, não produtos autônomos nem integrações prontas. A página para firmas de asseguração descreve hipóteses de valor, não um programa de parceria comercial disponível.
 
-1. Tenho um problema?
-2. Esse problema custa dinheiro?
-3. Existe um nome para ele?
-4. Evidence Operations
-5. Existe uma forma melhor de resolver?
-6. Eveedence
-7. Como posso confiar nessa prova?
-8. Provability
-9. `evdnce`
+## Limites
 
-## Arquitetura de marca
-
-```text
-EVEEDENCE · Evidence Operations
-"Transforme o que aconteceu em evidência que você consegue defender."
-   ├─ Incident Evidence
-   ├─ Decision Evidence
-   ├─ Assurance Evidence
-   └─ Partner Platform
-
-FUNDAÇÃO TÉCNICA · Provability Infrastructure
-   └─ evdnce · especificação, verificador, pesquisa
-```
-
-`evdnce` fica em **Abordagem técnica → pesquisa evdnce**, nunca no hero nem no menu como “Standard”: há ADRs em `Proposed`, gates abertos e nenhuma segunda implementação independente. Quando os gates fecharem: Eveedence = produto comercial, `evdnce` = especificação aberta.
-
-A frase que queremos ouvir repetida: **“A Eveedence é para quando alguém pergunta ‘prove’.”**
-
-## Hero
-
-> **Quando alguém pedir para provar, não comece do zero.**
-> A Eveedence transforma evidências espalhadas pelos seus sistemas em casos que sua equipe consegue reconstruir, verificar e defender.
-> Para incidentes, decisões e controles que precisam sobreviver a auditorias, clientes e reguladores.
-
-CTA principal **Reconstrua um caso real**; secundário **Veja como funciona**. “Agendar uma demo” pede que o visitante acredite no produto; “Reconstrua um caso real” pede só que ele reconheça o problema. Não usar: “Infraestrutura para evidência regulatória criptograficamente verificável”.
-
-## O que não somos
-
-Não é mais um GRC. Não é mais um repositório de logs. Não é mais um checklist de compliance. Não é um score de conformidade caixa-preta: quando não há evidência suficiente, a resposta pode ser “não sabemos”. E a frase que reduz resistência: **a Eveedence não substitui seu SIEM, GRC, KYC, ticketing ou case-management; ela conecta a evidência produzida por eles.**
-
-## Quem compramos primeiro
-
-| ICP | Cargos de entrada | Dor |
-|---|---|---|
-| A · assurance, cyber, consultorias (outbound inicial) | Managing Partner, Partner de Cyber Risk ou GRC, Head de Assurance, Head de IR | Margem: quanto trabalho humano repetitivo existe em produzir pacotes de evidência. O comprador econômico também ganha dinheiro com o processo. |
-| B · empresa regulada | CISO, Head de Cyber, Head de GRC, Head de IR, DPO; depois CRO, CCO, Auditoria Interna | A dor de produzir a prova é de Security, Risk e Compliance, não do CTO. |
-| C · IA e software regulado (não é o primeiro outbound) | Head de AI Governance, Model Risk, Responsible AI; em SaMD, Regulatory Affairs e Quality | Decisão automatizada que precisa ser reconstruída. |
-
-Comitê de compra típico: champion (Head de GRC, Privacidade ou Compliance), usuário (analista, auditor, IR), técnico (CISO, arquitetura), jurídico (DPO), comprador econômico (CISO, CCO, CRO ou Partner) e procurement.
-
-## Jornada comercial
-
-```text
-CONTEÚDO "Can you prove it?" → TESTE DO CUSTO DA PROVA → DISCOVERY DE 30 MIN (um caso real)
-  → MAPEAMENTO DO EVIDENCE JOB → DIAGNÓSTICO PAGO → DESIGN PARTNER → PILOTO → PLATAFORMA ANUAL
-```
-
-Conteúdo e venda usam o mesmo objeto, um **Evidence Job**: não há quebra entre marketing e produto. Valores (diagnóstico, piloto, plataforma) são internos e **não vão para o site**.
-
-A primeira call é “mostre-me como vocês fariam hoje”, não uma demo. Onde começaria? Quem chamaria? Qual sistema abriria? Onde está a política? Como descobriria a versão? Como saberia que todas as evidências estão presentes? Quem aceitaria a conclusão? No fim da reunião, não “quer ver a plataforma?”, mas: “existem seis sistemas e três pontos em que a reconstrução depende de conhecimento humano; o próximo passo é reconstruir um caso real e medir esse custo.”
+- Presença, integridade, cobertura e suficiência são dimensões distintas.
+- Não prometer certificação, conformidade, validade jurídica, veracidade, autoria pessoal ou ausência de risco com base em uma assinatura.
+- Não alegar redução de custo, resultados de clientes, integração operacional ou verificação completa sem evidência específica.
+- A camada técnica permanece em desenvolvimento. Nome público, licença, lançamento e alegações de interoperabilidade dependem de revisão própria; o kit não amplia essas permissões.
+- Pesquisa de UX orienta jornadas e telas; identidade, tokens e componentes obedecem ao contrato v0.2.0.

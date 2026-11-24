@@ -18,7 +18,7 @@ export function SiteHeader() {
       <a href="/#caso" onClick={() => setOpen(false)}>Um caso</a>
       <a href="/#como-funciona" onClick={() => setOpen(false)}>Como funciona</a>
       <a href="/#solucoes" onClick={() => setOpen(false)}>Soluções</a>
-      <a href="/assurance" onClick={() => setOpen(false)}>Para firmas de assurance</a>
+      <a href="/assurance" onClick={() => setOpen(false)}>Para firmas de asseguração</a>
       <a href="/custo-da-prova" className="ev-button ev-button--secondary" onClick={() => setOpen(false)}>Teste do Custo da Prova <ArrowRight size={15} aria-hidden="true" /></a>
     </nav>
   </div></header>;
@@ -49,7 +49,7 @@ export function NotCard({ title, body }: SiteCard) {
   return <article className="ev-not-card"><h3>{title}</h3><p>{body}</p></article>;
 }
 
-export function TechNote({ children, caption = "Pesquisa evdnce · arquitetura em desenvolvimento; esta demonstração não apresenta um padrão público congelado." }: { children?: ReactNode; caption?: string }) {
+export function TechNote({ children, caption = "Especificação de evidências em desenvolvimento; esta demonstração não apresenta um padrão público congelado." }: { children?: ReactNode; caption?: string }) {
   return <Section id="abordagem-tecnica" eyebrow="Abordagem técnica"><div className="ev-tech"><p>{children ?? "Presença, integridade e suficiência são perguntas diferentes. Um documento assinado não prova, sozinho, que a conclusão está correta."}</p><span className="ev-caption">{caption}</span></div></Section>;
 }
 
@@ -87,7 +87,7 @@ export function ProofTeaser() {
 }
 
 export function SiteFooter() {
-  return <footer className="ev-footer"><div className="ev-container ev-footer__inner"><Brand /><p>Evidence Operations<br /><span>Para quando alguém pergunta “prove”.</span></p><nav aria-label="Rodapé"><a href="/custo-da-prova">Teste do Custo da Prova</a><a href="/#abordagem-tecnica">Abordagem técnica</a></nav></div></footer>;
+  return <footer className="ev-footer"><div className="ev-container ev-footer__inner"><Brand /><p>Governança e Asseguração de IA<br /><span>Para quando alguém pergunta “prove”.</span></p><nav aria-label="Rodapé"><a href="/custo-da-prova">Teste do Custo da Prova</a><a href="/#abordagem-tecnica">Abordagem técnica</a></nav></div></footer>;
 }
 
 export function SiteHome() {
@@ -96,7 +96,7 @@ export function SiteHome() {
     <Section id="caso" eyebrow="Can you prove it?" title={<>Uma conclusão.<br />Quatro perguntas antes de aceitá-la.</>}><QATable /></Section>
     <Section id="como-funciona" eyebrow="Como começar" title={<>Reconstrua um caso.<br />Meça o esforço de provar.</>} subtle><HowSteps /><Callout>O teste organiza suas respostas. Não verifica documentos nem emite um veredito de conformidade.</Callout></Section>
     <Section id="solucoes" eyebrow="Por onde começar" title={<>O mesmo problema.<br />Três formas de ele aparecer.</>}><div className="ev-solutions">{solutionCards.map(card => <SolutionCard key={card.title} title={card.title} body={card.body} href={card.href} />)}</div></Section>
-    <Section eyebrow="O que não somos" title={<>Você não precisa trocar<br />as ferramentas que já executam o trabalho.</>} subtle><p className="ev-section-lead">Seu SIEM, GRC, KYC, ticketing ou case management continuam fazendo o que fazem. A Eveedence organiza a evidência produzida por eles e deixa explícito o limite da conclusão.</p><div className="ev-not-grid">{notCards.map(card => <NotCard key={card.title} title={card.title} body={card.body} />)}</div></Section>
+    <Section eyebrow="O que não somos" title={<>Você não precisa trocar<br />as ferramentas que já executam o trabalho.</>} subtle><p className="ev-section-lead">Seu SIEM, GRC, KYC, ticketing ou case management continuam fazendo o que fazem. A proposta da Eveedence é organizar a evidência produzida por eles e deixar explícito o limite da conclusão, sem interferir na execução.</p><div className="ev-not-grid">{notCards.map(card => <NotCard key={card.title} title={card.title} body={card.body} />)}</div></Section>
     <ProofTeaser /><TechNote />
   </main><SiteFooter /></div>;
 }
@@ -106,7 +106,7 @@ export function SolutionDetail({ kind }: { kind: SolutionKind }) {
   return <div className="ev-root" data-ev-theme="light"><a className="ev-skip" href="#conteudo">Pular para conteúdo</a><SiteHeader /><main id="conteudo"><PageHero eyebrow={page.eyebrow} title={page.title} lead={page.lead} />
     <Section eyebrow="A pergunta" title="Comece pelo que alguém precisará conseguir responder."><Callout><strong>{page.question}</strong></Callout></Section>
     <Section eyebrow="O Evidence Job" title="A resposta precisa ser composta, não lembrada." subtle><HowSteps steps={page.steps} /></Section>
-    <Section eyebrow="O que a Eveedence organiza" title="Evidência com origem, versão e limite explícitos."><EvidenceScatter items={page.evidence} /></Section>
+    <Section eyebrow="Evidências a investigar" title="Evidência com origem, versão e limite explícitos."><EvidenceScatter items={page.evidence} /></Section>
     <Section eyebrow="Limites" title="Provar melhor não transforma a evidência em algo que ela não é." subtle><div className="ev-not-grid">{page.limits.map(limit => <NotCard key={limit.title} title={limit.title} body={limit.body} />)}</div></Section>
     <ProofTeaser /><TechNote />
   </main><SiteFooter /></div>;
@@ -119,14 +119,14 @@ export function AssuranceFirmsPage() {
     { number: "03", title: "Entregue um expediente reavaliável", body: "O cliente consegue entender o que foi considerado, o que faltou e o limite da conclusão." },
   ];
   const benefits: ReadonlyArray<SiteStep> = [
-    { number: "01", title: "Margem", body: "Reduza trabalho humano repetitivo de pedir, organizar, versionar e remontar evidências." },
+    { number: "01", title: "Margem", body: "Quanto trabalho humano repetitivo existe ao pedir, organizar, versionar e remontar evidências?" },
     { number: "02", title: "Consistência", body: "A mesma metodologia operacional pode ser aplicada em múltiplos clientes e ciclos." },
     { number: "03", title: "Defensabilidade", body: "Base, escopo, evidência e limitações permanecem ligados ao trabalho entregue." },
   ];
-  return <div className="ev-root" data-ev-theme="light"><a className="ev-skip" href="#conteudo">Pular para conteúdo</a><SiteHeader /><main id="conteudo"><PageHero eyebrow="Para firmas de assurance" title="Menos tempo montando o expediente. Mais tempo avaliando evidência." lead="A Eveedence ajuda firmas de assurance, cyber e consultorias a estruturar o trabalho repetitivo de evidência sem substituir independência, julgamento profissional ou a conclusão do avaliador." cta="Mapeie um Evidence Job" />
+  return <div className="ev-root" data-ev-theme="light"><a className="ev-skip" href="#conteudo">Pular para conteúdo</a><SiteHeader /><main id="conteudo"><PageHero eyebrow="Para firmas de asseguração" title="Menos tempo montando o expediente. Mais tempo avaliando evidência." lead="Investigamos como reduzir o trabalho repetitivo de evidência de firmas de asseguração, sem substituir independência, julgamento profissional ou a conclusão do avaliador." cta="Mapeie um Evidence Job" />
     <Section eyebrow="Onde a margem some" title="A avaliação termina. A montagem do pacote começa de novo."><EvidenceScatter items={benefits} /></Section>
-    <Section eyebrow="Como trabalhar" title="Estruture a operação sem automatizar o julgamento." subtle><HowSteps steps={steps} /><Callout>A Eveedence não assina sua conclusão nem transforma a plataforma em auditor. Ela organiza o que foi pedido, fornecido, avaliado e declarado como gap.</Callout></Section>
-    <Section eyebrow="Modelo de parceria" title="Um parceiro pode operar o mesmo padrão de Evidence Operations em vários clientes."><div className="ev-assurance-model"><div><span className="ev-number">PARTNER</span><strong>Firma de assurance</strong><p>Metodologia, relação com o cliente e conclusão profissional.</p></div><ArrowRight aria-hidden="true" /><div><span className="ev-number">EVIDENCE OPS</span><strong>Eveedence</strong><p>Estrutura, provenance, version binding, gaps e expediente.</p></div><ArrowRight aria-hidden="true" /><div><span className="ev-number">CLIENTES</span><strong>Múltiplos engagements</strong><p>Mesma operação de prova, escopos e conclusões separados.</p></div></div></Section>
+    <Section eyebrow="Como trabalhar" title="Estruture a operação sem automatizar o julgamento." subtle><HowSteps steps={steps} /><Callout>A Eveedence não assina sua conclusão nem substitui o auditor. O modelo proposto distingue o que foi pedido, fornecido, avaliado e declarado como lacuna.</Callout></Section>
+    <Section eyebrow="Hipótese de colaboração" title="Como uma operação de evidências poderia apoiar avaliações em vários clientes?"><div className="ev-assurance-model"><div><span className="ev-number">PARTNER</span><strong>Firma de asseguração</strong><p>Metodologia, relação com o cliente e conclusão profissional.</p></div><ArrowRight aria-hidden="true" /><div><span className="ev-number">EVIDENCE OPS</span><strong>Eveedence</strong><p>Estrutura, provenance, version binding, gaps e expediente.</p></div><ArrowRight aria-hidden="true" /><div><span className="ev-number">CLIENTES</span><strong>Múltiplos engagements</strong><p>Mesma operação de prova, escopos e conclusões separados.</p></div></div></Section>
     <Section eyebrow="O que não muda" title="A ferramenta não cria independência por conta própria." subtle><div className="ev-not-grid"><NotCard title="O julgamento continua sendo seu." body="A Eveedence não decide se a evidência é suficiente para o trabalho profissional sem o critério e a avaliação responsáveis." /><NotCard title="O avaliador não deve avaliar o próprio trabalho." body="A composição de evidência não remove requisitos de independência, segregação ou conflito de interesse aplicáveis ao engagement." /></div></Section>
     <ProofTeaser /><TechNote />
   </main><SiteFooter /></div>;

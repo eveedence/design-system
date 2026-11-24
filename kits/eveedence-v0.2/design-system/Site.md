@@ -8,16 +8,16 @@ Arquitetura e blueprint das páginas. Os previews de página (`PageHomeTop`, `Pa
 Home
 Soluções ▾
    Incident Evidence · Decision Evidence · Assurance Evidence
-Para firmas de assurance
+Para firmas de asseguração
 Como funciona
 Recursos ▾
    Evidence Jobs · Pesquisa · Guias · Casos
-Abordagem técnica  (pesquisa evdnce)
+Abordagem técnica
 Empresa
 [Reconstrua um caso]
 ```
 
-Começar pequeno: o objetivo é o visitante entender a tese, não ter 40 páginas. Regulador **nunca** é item de menu. Dentro de uma solução, o regulador vira “Contexto aplicável” (ANPD, BCB, Anatel, ECA Digital) e o Evidence Job continua sendo o produto. Páginas de solução reutilizam `Hero`, `CaseThread`, `QATable`, `SolutionCard` e `ProofTeaser`; só o caso de exemplo muda.
+Começar pequeno: o objetivo é o visitante entender a tese, não ter 40 páginas. Regulador **nunca** é item de menu. Dentro de uma solução, o regulador vira “Contexto aplicável” (ANPD, BCB, Anatel, ECA Digital) e o Evidence Job continua sendo a unidade de investigação. Páginas de solução reutilizam `Hero`, `CaseThread`, `QATable`, `SolutionCard` e `ProofTeaser`; só o caso de exemplo muda.
 
 ## Home: ordem das seções
 
@@ -38,12 +38,12 @@ Depois do hero, mostrar um **caso**, não features: não “Evidence Graph / Cry
 
 ## Teste do Custo da Prova (`ProofTest`)
 
-O CTA mais importante do site, no lugar de “Book a demo”. O visitante escolhe uma decisão ou incidente **encerrado há pelo menos 90 dias** e responde sete perguntas: pessoas, sistemas, política vigente exata, artifacts de origem desconhecida, “não existia” × “não encontramos”, tempo, repetibilidade por um terceiro.
+O CTA conduz à ficha exploratória, sem prometer uma demo operacional ou diagnóstico contratado. O visitante escolhe uma decisão ou incidente **encerrado há pelo menos 90 dias** e responde sete perguntas: pessoas, sistemas, política vigente exata, artifacts de origem desconhecida, “não existia” × “não encontramos”, tempo, repetibilidade por um terceiro.
 
 - O resultado é uma **ficha**, não uma nota: sistemas envolvidos, pessoas necessárias, proveniência desconhecida, version binding (completo, parcial, ausente), tempo estimado, repetível por terceiro. “Insumos de reconstrução” = pessoas + sistemas, e o rodapé da ficha diz isso. Sem pontuação, sem faixa, sem “risco alto”.
 - Lacunas aparecem como lista do que a equipe teria de resolver à mão (`ev-sheet__open`), nunca como veredito.
 - Hoje o componente **não envia nada**: as respostas ficam no navegador e o texto da página diz isso. Se um dia a ficha for enviada ou salva, a frase “Suas respostas ficam neste navegador” sai ou muda **no mesmo commit**.
-- Fecha com **“Reconstrua esse caso conosco”**.
+- Fecha com uma ficha local. Não implica disponibilidade de um serviço contratado.
 
 ## Regras de página
 
@@ -56,11 +56,11 @@ O CTA mais importante do site, no lugar de “Book a demo”. O visitante escolh
 
 ## Afirmações a validar antes de publicar
 
-O site descreve capacidades. Cada linha abaixo precisa ser verdadeira no dia da publicação ou ser reescrita:
+A categoria institucional é Governança e Asseguração de IA; a promessa é uma direção de produto. O site apresenta exemplos e hipóteses de valor. Toda afirmação de capacidade precisa de evidência antes da publicação:
 
 1. “A Eveedence **se conecta** às fontes onde o trabalho já acontece” (passo 1 de Como funciona): hoje é verdade para quais conectores?
-2. “Produz um expediente que pode ser **reconstruído e avaliado**”: o expediente existe como entregável hoje, ou é o diagnóstico pago?
+2. Expediente reconstruível e avaliável: apresentar como exemplo ou objetivo até existir evidência de entrega; não anunciar diagnóstico pago.
 3. “Casos que sua equipe consegue **verificar**”: verificar o quê, por quem, com qual ferramenta? Manter alinhado ao Verified-vs-Present do produto.
 4. Cadeia de evidência no hero: dados são fictícios e rotulados; garantir que nenhum nome de ferramenta real (Splunk, ServiceNow…) apareça sem acordo.
-5. `evdnce`: só “em desenvolvimento ativo, ainda não é padrão público congelado”.
-6. “Para firmas de assurance” no menu: a página existe com proposta de valor própria (margem, não compliance) antes de entrar no menu.
+5. Especificação técnica: em desenvolvimento; não anunciar nome público novo, padrão congelado ou interoperabilidade independente não demonstrada.
+6. “Para firmas de asseguração”: apresentar necessidades e hipóteses de valor, sem afirmar redução comprovada de custo, oferta ou parceria disponível.

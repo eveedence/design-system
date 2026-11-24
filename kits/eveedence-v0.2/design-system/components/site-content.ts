@@ -71,8 +71,8 @@ export const solutionContent: Record<SolutionKind, {
       { number: "03", title: "Claim ceiling", body: "O expediente explicita o que a evidência demonstra — e o que não demonstra." },
     ],
     limits: [
-      { title: "Não decide se o incidente é notificável.", body: "A Eveedence organiza o que sustenta a decisão; o critério continua com sua política, jurídico e responsáveis." },
-      { title: "Não exige centralizar todo o dado bruto.", body: "O artifact sensível pode permanecer no sistema adequado; a composição pode trabalhar com referência e vínculo protegido." },
+      { title: "Não decide se o incidente é notificável.", body: "A proposta é organizar o que sustenta a decisão; o critério continua com sua política, jurídico e responsáveis." },
+      { title: "Não exige centralizar todo o dado bruto.", body: "A arquitetura pretende permitir referências protegidas sem exigir a transferência de todo o dado bruto; disponibilidade depende da integração." },
     ],
   },
   decision: {
@@ -108,12 +108,12 @@ export const solutionContent: Record<SolutionKind, {
       { number: "04", title: "Conclusão relativa", body: "A conclusão fica ligada ao escopo, basis, audiência e limitações declaradas." },
     ],
     evidence: [
-      { number: "01", title: "Menos remontagem", body: "O mesmo job pode ser executado com estrutura consistente em avaliações recorrentes." },
+      { number: "01", title: "Menos remontagem", body: "Investigar se uma estrutura consistente reduziria a remontagem em avaliações recorrentes." },
       { number: "02", title: "Transparência de gaps", body: "Follow-ups deixam de se misturar com evidência originalmente fornecida." },
-      { number: "03", title: "Reavaliação possível", body: "Outro profissional consegue inspecionar o expediente e entender o limite da conclusão." },
+      { number: "03", title: "Reavaliação possível", body: "O objetivo é permitir que outro profissional inspecione o expediente e entenda o limite da conclusão." },
     ],
     limits: [
-      { title: "Não substitui julgamento profissional.", body: "A plataforma organiza e preserva a base; a conclusão continua pertencendo ao avaliador responsável." },
+      { title: "Não substitui julgamento profissional.", body: "A proposta é organizar e preservar a base; a conclusão continua pertencendo ao avaliador responsável." },
       { title: "Não prova independência só por assinatura.", body: "Independência depende de fronteiras administrativas e do modelo de confiança declarado." },
     ],
   },

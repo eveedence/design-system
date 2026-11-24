@@ -1,6 +1,9 @@
 # Eveedence Design System v0.2 — frozen
 
-**Status:** `0.2.0` **frozen em 2026-10-08**. O freeze cobre o contrato visual/técnico deste kit; não altera readiness do produto, publicação do site ou gates do `evdnce`.\n\nEsta RC é wordmark-only e alinha o sistema a **Evidence Operations** comercialmente e **Provability Infrastructure** tecnicamente. O freeze do Design System não altera readiness do produto nem gates de publicação do evdnce.\n
+**Status:** `0.2.0` **frozen em 2026-10-08**. O freeze cobre o contrato visual/técnico deste kit; não altera readiness do produto, publicação do site ou gates do `evdnce`.
+
+Esta RC é wordmark-only. O contrato visual é independente do posicionamento: a categoria institucional vigente é **Governança e Asseguração de IA (AI Governance & Assurance)**. Evidence Operations descreve uma função; provabilidade descreve o território técnico. Nenhum deles substitui a categoria institucional.
+
 ## Abrir
 
 Na raiz do projeto:
@@ -38,11 +41,11 @@ pnpm start --hostname 127.0.0.1 --port 3107
 
 ### Documentação canônica de aplicação
 
-- `Posicionamento.md` — categoria comercial/técnica, Cost of Proof, ICPs e jornada comercial.
+- `Posicionamento.md` — aplicação editorial do posicionamento vigente, Cost of Proof e hipóteses de discovery, não ICPs ou ofertas validados.
 - `Site.md` — arquitetura das páginas, ordem da home, ProofTest e claims que precisam ser verdade antes da publicação.
 - `Conteudo.md` — linguagem editorial de LinkedIn/YouTube, pilares, regras visuais e ativos de captura.
 
-Esses três documentos governam a aplicação comercial do Design System. O README governa os fundamentos visuais e técnicos. Em caso de conflito, a decisão mais recente registrada nesses documentos substitui screenshots ou materiais históricos.
+Esses três documentos orientam a aplicação comercial do Design System, subordinada às decisões vigentes de estratégia e limites de produto. O README governa os fundamentos visuais e técnicos; `tokens.json` e o SVG mestre prevalecem sobre screenshots e materiais históricos. A pesquisa de UX governa jornadas e telas, não o contrato de marca. O legado `packages/design-system/` não é referência para novos trabalhos. A baseline visual de 08/10/2026 permanece no commit `44d50876edcc04e8b532899f8401f05e05336a4b`; a revisão editorial de 24/11 não cria uma nova versão visual.
 
 Os valores em #CE102C dos screenshots históricos não definem a identidade nova. O logotipo atualizado fornecido usa **#FF0004**. O símbolo anterior foi retirado de todas as aplicações ativas.
 
@@ -60,7 +63,11 @@ Os valores em #CE102C dos screenshots históricos não definem a identidade nova
 - Fontes reaproveitadas do cache compilado do site: Geist Latin variável e Geist Mono Latin variável. Não há pedido externo de fonte em runtime.
 - A tagline antiga não foi incorporada.
 
-## Arquitetura de tokens\n\nContrato da RC: `primitives → semantics → components`. Valores literais existem apenas em primitives; semantics apontam para primitives; componentes consomem apenas CSS variables semânticas. O gerador falha se encontrar hex hardcoded em `eveedence.css`.\n\n## Cor e acessibilidade
+## Arquitetura de tokens
+
+Contrato da RC: `primitives → semantics → components`. Valores literais existem apenas em primitives; semantics apontam para primitives; componentes consomem apenas CSS variables semânticas. O gerador falha se encontrar hex hardcoded em `eveedence.css`.
+
+## Cor e acessibilidade
 
 - Identidade: #FF0004. Contraste contra branco ~4:1; inadequado para texto pequeno branco/vermelho.
 - Ação de marca: #CE0004, com texto branco; hover #B00003.
@@ -76,7 +83,7 @@ Os valores em #CE102C dos screenshots históricos não definem a identidade nova
 
 ## Conteúdo e limites
 
-- Posicionamento preservado: Evidence Operations / Custo da Prova.
+- Categoria institucional: Governança e Asseguração de IA. Custo da Prova é uma hipótese de discovery e uma narrativa de problema, não uma oferta validada.
 - A copy da home foi ajustada para demonstrar o problema e o método, sem afirmar conectores ou uma plataforma operacional já disponível.
 - Soluções são contextos de início; não há links para páginas ainda inexistentes.
 - Os exemplos continuam ilustrativos e apresentam lacunas.

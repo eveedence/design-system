@@ -1,6 +1,6 @@
 # Eveedence — site e design system
 
-Implementação local do site e do catálogo com o logotipo oficial atualizado. Usa apenas o wordmark, sem símbolo.
+Referência visual v0.2.0 congelada em 08/10/2026: implementação local do site e do catálogo com o logotipo oficial atualizado. Usa apenas o wordmark, sem símbolo ou tagline. Os pacotes legados não são fonte canônica; pesquisa de UX e estratégia vigentes orientam fluxos e conteúdo sem alterar este contrato visual.
 
 ## Desenvolvimento
 
@@ -26,4 +26,4 @@ Reconstrução editável das capturas fornecidas, com exemplos ilustrativos e la
 
 O SVG oficial foi preservado. As fontes Geist são distribuídas com sua licença OFL em `public/brand/fonts/OFL.txt`. Os ativos de marca não recebem licença de uso pelo simples acesso a este repositório. Não foi escolhida uma nova licença para o código.
 
-Os resultados de contraste e de navegação local estão em `design-system/contrast-report.json` e `design-system/browser-report.json`. A checagem de tokens cobre pares específicos e não constitui auditoria WCAG completa.
+O relatório de contraste versionado está em `design-system/contrast-report.json`; os relatórios de navegador são gerados na validação e disponibilizados como artifacts de CI. A checagem de tokens cobre pares específicos e não constitui auditoria WCAG completa.

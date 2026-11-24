@@ -4,8 +4,8 @@ import "./globals.css";
 import "@/design-system/eveedence.css";
 
 export const metadata: Metadata = {
-  title: "Eveedence — Custo da Prova",
-  description: "Quando alguém pedir para provar, não comece do zero. Explore o esforço de reconstruir decisões, incidentes e controles.",
+  title: "Eveedence — Governança e Asseguração de IA",
+  description: "Governança de IA que você consegue provar. Explore o esforço de reunir evidências de decisões, controles e resultados de processos que usam IA.",
   icons: { icon: "/brand/eveedence-logotipo.svg" },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
